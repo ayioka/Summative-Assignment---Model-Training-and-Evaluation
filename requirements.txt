@@ -1,0 +1,8 @@
+pandas>=2.0
+numpy>=1.20
+matplotlib>=3.5
+seaborn>=0.11
+tensorflow>=2.20.0
+scikit-learn>=1.0
+imblearn>=0.0
+gdown>=4.
