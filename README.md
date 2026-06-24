@@ -16,9 +16,11 @@ Repository Structure
 
 credit-card-fraud-detection/
 │
-├── Shem_Ayioka_Summative.ipynb   ← Main notebook (all code + analysis)
-├── README.md                      ← This file
-└── requirements.txt               ← Python dependencies
+├── Shem_Ayioka_Summative.ipynb 
+
+├── README.md 
+
+└── requirements.txt               
 
 
 Note: The dataset is downloaded automatically inside the notebook via gdown from Google Drive. No manual download is needed.
@@ -30,31 +32,29 @@ Preprocessing
 
 
 Time and Amount scaled using RobustScaler (resistant to outliers)
-Preserved 80/20 split between train and test to maintain class balance.
-Data leakage was avoided by applying SMOTE to just training data
+Preserved an 80/20 split between train and test to maintain class balance.
+Data leakage was avoided by applying SMOTE to just the training data
 
 
 **Imbalance Strategies Compared**
 
-DescriptionNoneTrain on raw imbalanced data: SMOTE: Synthesize the minority class (fraud) to balance the data, with a heavier weight given to their loss function.
+Description: None. Train on raw imbalanced data: SMOTE: Synthesize the minority class (fraud) to balance the data, with a heavier weight given to their loss function.
 
-**Experiments**
 
-Experiments
-
-#ModelTreatment1Logistic RegressionNone2Random ForestNone3Random ForestSMOTE4MLP (Functional API)None5MLP (Functional API)SMOTE6MLP (Functional API)Class Weights7MLP Complex (Functional API)Class Weights
-
-**Key Findings**
+# **Key Findings**
 
 
 Random Forest (No Treatment) showed the highest PR-AUC and a good precision and recall balance, making it the most operationally viable model.
+
 In the case of MLP with Class Weights, the Recall was extremely high, with almost all fraud being caught, but with a horrendous number of false positives — thousands of legitimate transactions being flagged as errors.
+
 SMOTE + Deep Learning did not perform well due to generating synthetic samples on already abstracted PCA features which led to noisy decision boundaries for gradient-descent-based models.
-On tabular and PCA transformed financial data sets, the tree-based ensembles beat deep learning, showing that deep learning is not necessarily better on structured, imbalanced sets.
+
+On tabular and PCA-transformed financial data sets, the tree-based ensembles beat deep learning, showing that deep learning is not necessarily better on structured, imbalanced sets.
 
 
 
-**How to Run**
+# **How to Run**
 
 Google Colab is the recommended option.The first option is Google Colab (Recommended).
 
@@ -64,33 +64,20 @@ Run all cells, from top to bottom (Runtime → Run all)
 The datasets are downloaded automatically, no setup is required.
 
 
-Option 2: Local Jupyter
+# **Option 2: Local Jupyter**
 
-bash# 1. Clone the repository
+# 1. Clone the repository
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
 
 # 2. Install dependencies
 Install the requirements from requirements.txt file:
 
-# 3. Launch Jupyter
-jupyter notebook Shem_Ayioka_Summative.ipynb
+ # 3. Launch Jupyter
+notebook Shem_Ayioka_Summative.ipynb
 
 
-**Requirements**
 
-pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
-imbalanced-learn
-tensorflow
-gdown
-
-Attach all in one operation:
-
-pip install -r requirements.txt
 
 
 **Reproducibility**
@@ -105,16 +92,16 @@ tf.random.set_seed(SEED)
 When the notebook is run from top to bottom, it will yield the same results each time.
 
 
-**Limitations**
+# **Limitations**
 
 
 Loss of interpretability: V1–V28 are anonymized principal components, which do not allow any domain-specific feature engineering or interpretation of the model decision.
-Static snapshot: The data is only for 2 days in 2013. Fraud patterns change, this model will experience concept drift in production.
+Static snapshot: The data is only for 2 days in 2013. Fraud patterns change; this model will experience concept drift in production.
 The synthetic oversampling of the abstract principal components creates noisy and overlapping boundaries that are detrimental to neural networks, especially.
 
 
 
-Author
+**Author**
 
 _Shem Ayioka_
 
